@@ -5,7 +5,15 @@
   * Exception Handling
   * Reading from file
   * Writing to file
+* **Note**
+  * The code block below demonstrates how to create a `File` object that references the current project directory
 
+```java
+String projectDirectory = System.getPropterty("user.dir");
+String srcMain = projectDirectory + "/src/main";
+String newFileName = srcMain + "/hello-world.txt";
+File file = new File(newFileName);
+```
 
 
 ## Instructions
