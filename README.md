@@ -9,10 +9,13 @@
   * The code block below demonstrates how to create a `File` object that references the current project directory
 
 ```java
-String projectDirectory = System.getPropterty("user.dir");
-String srcMain = projectDirectory + "/src/main";
-String newFileName = srcMain + "/hello-world.txt";
-File file = new File(newFileName);
+public static void main(String[] args) {
+    String projectDirectory = System.getProperty("user.dir");
+    String srcMain = projectDirectory + "/src/main";
+    String newFileName = srcMain + "/hello-world.txt";
+    File file = new File(newFileName);
+    file.createNewFile();
+}
 ```
 
 
