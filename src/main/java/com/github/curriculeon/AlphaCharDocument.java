@@ -1,6 +1,5 @@
 package com.github.curriculeon;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
