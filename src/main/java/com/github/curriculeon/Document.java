@@ -3,6 +3,7 @@ package com.github.curriculeon;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,6 +38,8 @@ public class Document implements DocumentInterface {
         /// testing
 
 
+
+
     }
 
     @Override
@@ -59,15 +62,18 @@ public class Document implements DocumentInterface {
     }
 
     @Override
-    public String read() throws IOException {
-        int i;
-        String results = "";
-        while ((i = fileReader.read()) != -1) {
-            System.out.print((char)i);
-            results += (char)i;
+    public String read() {
+        try{
+            int i;
+            String results = "";
+            while ((i = fileReader.read()) != -1) {
+                System.out.print((char)i);
+                results += (char)i;
+            }
+            return results;
+        }catch(IOException e){
+            throw new RuntimeException(e);
         }
-        return results;
-
     }
 
     @Override
@@ -79,7 +85,7 @@ public class Document implements DocumentInterface {
     }
 
     public List<String> toList() {
-        return null;
+        return Arrays.asList(read().split("\n"));
     }
 
     @Override
