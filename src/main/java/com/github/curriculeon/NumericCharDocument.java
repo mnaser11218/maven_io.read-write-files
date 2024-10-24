@@ -12,9 +12,14 @@ public class NumericCharDocument extends Document {
 
     @Override
     public void write(String contentToBeWritten) {
+        if(!isNumeric(contentToBeWritten)){
+            throw new IllegalArgumentException();
+        }else{
+            super.write(contentToBeWritten);
+        }
     }
 
     private Boolean isNumeric(String s) {
-        return null;
+        return s.matches("\\d+");
     }
 }
