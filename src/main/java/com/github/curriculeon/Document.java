@@ -1,9 +1,9 @@
 package com.github.curriculeon;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+//import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,22 +25,57 @@ public class Document implements DocumentInterface {
         this.fileReader = new FileReader(file);
     }
 
-    @Override
-    public void write(String contentToBeWritten) throws IOException {
+//    @Override
+//    public void write(String contentToBeWritten) {
+//            try{
+//                fileWriter.write(contentToBeWritten);
+//               // fileWriter.flush(); // Flushes the stream
+//
+//                fileWriter.close();
+//            }catch(IOException e){
+//                throw new RuntimeException(e);
+//            }
+//
+//
+//
+//    }
+public void write(String contentToBeWritten) {
+    try (FileWriter fileWriter = new FileWriter(file, true)) {
         fileWriter.write(contentToBeWritten);
-        fileWriter.close();
+    } catch (IOException e) {
+        throw new RuntimeException(e);
     }
+}
+
 
     @Override
-    public void write(Integer lineNumber, String valueToBeWritten) throws IOException {
-//        fileWriter.write(lineNumber valueToBeWritten);
-       // fileWriter.close();
-        /// testing
+    public void write(Integer lineNumber, String valueToBeWritten) {
+        try(FileWriter fileWriter = new FileWriter(file, true)) {
 
+            String[] array= read().split("\n");
+            array[lineNumber] = valueToBeWritten;
+            String result = String.join("\n", array);
+            fileWriter.write(result);
 
-
+        }catch(IOException e){
+            throw new RuntimeException(e);
+        }
 
     }
+//@Override
+//public void write(Integer lineNumber, String valueToBeWritten) {
+//    try (FileWriter fileWriter = new FileWriter(file, false)) { // false for overwriting
+//        String[] array = read().split("\n");
+//        array[lineNumber] = valueToBeWritten;
+//
+//        String result = String.join("\n", array);  // Use newline to separate lines
+//        fileWriter.write(result);
+//
+//        System.out.println(this.read());
+//    } catch (IOException e) {
+//        throw new RuntimeException(e);
+//    }
+//}
 
     @Override
     public String read(Integer lineNumber) throws IOException {
@@ -67,9 +102,9 @@ public class Document implements DocumentInterface {
             int i;
             String results = "";
             while ((i = fileReader.read()) != -1) {
-                System.out.print((char)i);
                 results += (char)i;
             }
+
             return results;
         }catch(IOException e){
             throw new RuntimeException(e);
@@ -78,10 +113,21 @@ public class Document implements DocumentInterface {
 
     @Override
     public void replaceAll(String stringToReplace, String replacementString) {
+       List<String> string = this.toList();
+//        System.out.println(string.get(1));
     }
 
     @Override
     public void overWrite(String content) {
+
+
+        try {
+            //fileWriter = new FileWriter(file);
+            fileWriter.write(content);
+            fileWriter.close();
+        }catch(IOException e){
+            throw new RuntimeException(e);
+        }
     }
 
     public List<String> toList() {
@@ -90,7 +136,7 @@ public class Document implements DocumentInterface {
 
     @Override
     public File getFile() {
-        return null;
+        return file;
     }
 
     @Override
