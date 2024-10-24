@@ -113,8 +113,21 @@ public void write(String contentToBeWritten) {
 
     @Override
     public void replaceAll(String stringToReplace, String replacementString) {
-       List<String> string = this.toList();
-//        System.out.println(string.get(1));
+        String string = this.read().replaceAll(stringToReplace, replacementString);
+        write(string);
+       // System.out.println(string.toString());
+//        for (int i = 0; i < string.size(); i++) {
+//
+//      String replacedString = string.get(i).replaceAll(stringToReplace, replacementString);
+//           // string.set(i,replacedString );
+//            if(i == string.size()-1){
+//                newString += replacedString;
+//            }else{
+//                newString += replacedString + "\n";
+//
+//            }
+//        }
+       // write(newString);
     }
 
     @Override
